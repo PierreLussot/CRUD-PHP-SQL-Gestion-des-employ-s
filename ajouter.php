@@ -13,22 +13,26 @@
   <?php
 
 
-
+  //verifier que le boutton ajouter a bien été cliqué 
   if (isset($_POST['button'])) {
+    //extraction des information envoyé dans des variables par la methode POST 
     extract($_POST);
+    //Verifier si tous les champs ont été remplis
     if (isset($nom) && isset($prenom) && $age) {
+      //connexion a la BDD
       include_once('connexion.php');
+      //requete d'ajout
       $requete = mysqli_query(
         $connexion,
         "INSERT INTO Employe(nom,prenom,age)
         VALUES('$nom','$prenom','$age')"
       );
-      if ($requete) {
+      if ($requete) { //si la requete a été effectuée avec succès, on fait une redirection
         header('location: index.php');
-      } else {
+      } else { //si non
         $messages = "Employer non ajouter";
       }
-    } else {
+    } else { //si non
       $messages = "Veuillez remplir tout les champs";
     }
   }
