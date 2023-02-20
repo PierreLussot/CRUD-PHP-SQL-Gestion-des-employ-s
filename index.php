@@ -11,7 +11,8 @@
 
 <body>
     <div class="container">
-        <a href="ajouter.html" class="Btn_add"> <img src="images/plus.png"> Ajouter</a>
+        <a href="ajouter.php" class="Btn_add"> <img src="images/plus.png">Ajouter</a>
+
         <table>
             <tr id="items">
                 <th>Nom</th>
@@ -20,14 +21,27 @@
                 <th>Modifier</th>
                 <th>Supprimer</th>
             </tr>
-            <tr id="">
-                <td>steev</td>
-                <td>johson</td>
-                <td>25 ans</td>
-                <td> <a href="modifier.html"><img src="images/pen.png" alt=""></a> </td>
-                <td> <a href="#"><img src="images/trash.png" alt=""></a> </td>
 
-            </tr>
+            <?php
+            include_once('connexion.php');
+            $requete = mysqli_query($connexion, "SELECT * FROM Employe");
+            if (mysqli_num_rows($requete) === 0) {
+                echo "Il n'y a pas encore d'employé ajouter §";
+            } else {
+                while ($row = mysqli_fetch_assoc($requete)) {
+            ?>
+                    <tr>
+                        <td><?= $row['nom'] ?></td>
+                        <td><?= $row['prenom'] ?></td>
+                        <td> <?= $row['age'] ?></td>
+                        <td> <a href="modifier.php?id=<?= $row['id'] ?>"><img src="images/pen.png" alt=""></a> </td>
+                        <td> <a href="supprimer.php?id=<?= $row['id'] ?>"><img src="images/trash.png" alt=""></a> </td>
+                    </tr>
+            <?php
+                }
+            }
+            ?>
+
         </table>
 
     </div>
