@@ -11,8 +11,6 @@
 
 <body>
   <?php
-
-
   //verifier que le boutton ajouter a bien été cliqué 
   if (isset($_POST['button'])) {
     //extraction des information envoyé dans des variables par la methode POST 
@@ -36,8 +34,6 @@
       $messages = "Veuillez remplir tout les champs";
     }
   }
-
-
   ?>
   <div class="form">
     <a href="index.php" class="back_btn">
