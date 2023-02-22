@@ -30,10 +30,10 @@
     //extraction des information envoyé dans des variables par la methode POST 
     extract($_POST);
     //Verifier si tous les champs ont été remplis
-    if (isset($nom) && isset($prenom) && $age) {
+    if (!empty($nom) && !empty($prenom) && !empty($age)) {
       //requete de modification
       $modification = mysqli_query($connexion, "UPDATE employe SET nom= '$nom',prenom='$prenom',age='$age' WHERE id = $id");
-      if ($requete) { //si la requete a été effectuée avec succès, on fait une redirection
+      if ($modification) { //si la requete a été effectuée avec succès, on fait une redirection
         header('location: index.php');
       } else { //si non
         $messages = "Employer non modifié";
